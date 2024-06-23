@@ -130,7 +130,7 @@ namespace ProjEnv
                     int index = (y * width + x) * channel;
                     Eigen::Array3f Le(images[i][index + 0], images[i][index + 1],
                                       images[i][index + 2]);
-                    auto delta_w= CalcPreArea(x,y);
+                    auto delta_w= CalcArea(x,y,width, height);
                     for(int l=0;l<=SHOrder;l++){
                         for(int m=-l;m<=l;m++){
                             auto basicT_sh_proj = sh::EvalSH(l, m, Eigen::Vector3d(dir.x(), dir.y(), dir.z()).normalized());
@@ -214,7 +214,7 @@ public:
             auto shFunc = [&](double phi, double theta) -> double {
                 Eigen::Array3d d = sh::ToVector(phi, theta);
                 const auto wi = Vector3f(d.x(), d.y(), d.z());
-                double H=wi.dot(n);
+                double H=wi.normalized().dot(n.normalized());
                 if (m_Type == Type::Unshadowed)
                 {
                     // TODO: here you need to calculate unshadowed transport term of a given direction
