@@ -1,6 +1,8 @@
 /cmake-build-debug/
 /cmake-build-debug-visual-studio/
-*.exr
 *.png
-*.txt
 /cmake-build-release-visual-studio/
+*.txt
+*.xml
+*.png
+*.exr
